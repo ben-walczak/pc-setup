@@ -1,8 +1,10 @@
 # Docker
 
-What?
+Docker is a tool for containerizing applications, combining multiple tools and dependecies into a predictable deployable image.
 
-Why?
+**Why?**
+
+There's a pretty common phrase in enterprise, "How come it works on my machine but not another one?" Docker solves this issue by building multiple tools and dependencies into one image, which can then be run/deployed wherever docker containers can be run. Another common issue is "I know there's an error, but how can I debug this?" Docker resolves this issue by being able to deploy an image to rediscover an issue if you have no logs or information on the issue. For more information why check out [Docker docs](https://www.docker.com/why-docker/).
 
 ## Docker Engine
 "Docker Engine is an open source containerization technology for building and containerizing your applications. Docker Engine acts as a client-server application with:
@@ -16,10 +18,10 @@ The CLI uses [Docker APIs](https://docs.docker.com/engine/api/) to control or in
 For more details, see [Docker Architecture](https://docs.docker.com/get-started/overview/#docker-architecture)."
 - [docker docs](https://docs.docker.com/engine/)
 
-### Installation
+## Installation
 Following [this](https://docs.docker.com/engine/install/ubuntu/) guide from docker docs.
 
-### Install repository
+## Install repository
 
 1. Update `apt` and install packages to allow `apt` to use a repo over HTTPS
 ```bash
@@ -44,7 +46,7 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
-### Post Install
+## Post Install
 
 **Manage Docker as a non-root user**
 
@@ -86,3 +88,22 @@ To disable this behavior, use `disable` instead
 sudo systemctl disable docker.service
 sudo systemctl disable containerd.service
 ```
+
+## Delete unused Docker images, containers, and volumes
+Docker provides a single command that will clean up any resources — images, containers, volumes, and networks — that are dangling (not tagged or associated with a container):
+```bash
+docker system prune
+```
+
+To additionally remove any stopped containers and all unused images (not just dangling images), add the -a flag to the command:
+```bash
+docker system prune -a
+```
+
+To remove specific docker image:
+```bash
+docker images -a # list all docker images
+docker rmi <image id or tag to delete>
+```
+
+- [source](https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes)

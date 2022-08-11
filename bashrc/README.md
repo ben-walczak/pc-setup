@@ -1,5 +1,7 @@
 # bashrc
 
+Considering that linux is such a deep rabbit-hole. I'm considering having a separate repository on notes for linux. In such a case, this folder would be deprecated...
+
 **What and Why?**
 .bash_profile and .bashrc helps you customize your terminal to help you to be more productive. You can do things like change colors, create aliases, git prompt, auto-completition, and export certain variables.
 

@@ -77,3 +77,25 @@ Might be helpful to either save the mongodb uri or rather mongo configuration fi
 
 ## Final notes on Docker/Kubernetes
 The end goal is to deploy everything via kubernetes manifest files, but that's pretty difficult. I've said before that linux is probably the deepest rabbit hole of a technology, but I think kubernetes takes second in this race pretty easy. That being said, to understand some of the complexities of it is to deploy it via Docker. If we can learn how to deploy mongodb via docker, then we can learn how most containerized applications via Docker can be translated to kubernetes manifests. Now I'm not saying all technologies are the same in this regard, but mongodb is complex enough to help teach us how to take other containerized applications and turn them into kubernetes manifest files.
+
+## Helm/Operator Setup
+Hmm... so yeah looking back on the kubernetes setup for mongodb according to some random manifest files I found online, maybe not the best. After researching more about operators, the best method for implementing this would be the [mongodb operator](https://github.com/mongodb/mongodb-kubernetes-operator). As I've mentioned before in my [helm notes](https://github.com/ben-walczak/pc-setup/tree/main/helm), it would abstract the unecessary details from the deployment, so we can focus on what matters. That being said, let's start.
+
+All of the documentation on setup can be found [here](https://github.com/mongodb/mongodb-kubernetes-operator). The steps to deploy look like the following:
+
+1. Install or upgrade the Operator
+2. Deploy and configure MongoDB resources.
+3. Create a database user with SCRAM authentication.
+4. Secure MongoDB resource connections using TLS.
+
+### Install or upgrade the Operator
+[Docs](https://github.com/mongodb/mongodb-kubernetes-operator/blob/master/docs/install-upgrade.md)
+
+To install the Custom Resource Definitions and the Community Operator in the `default` namespace using Helm, run the install command from the terminal:
+```bash
+helm install community-operator mongodb/community-operator
+```
+
+[How to install MongoDB on Kubernetes | Youtube](https://www.youtube.com/watch?v=Pv70IcwipF0)
+
+

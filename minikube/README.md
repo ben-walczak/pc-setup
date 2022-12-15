@@ -21,6 +21,10 @@ Main benefits of minikube as to kubernetes:
 - Minikube can help you walk the talk.
 - Minikube can be used as a proof-of-concept tool.
 
+## Kubernetes Elevator Pitch
+
+Software and computer science are relatively new fields still in its infancy. Naturally, we had some poorly working software 20 years ago. Since then, a number of languages, technologies, and packages have come out all competing to prove that they're better than their predecessor. The lifespan of these technologies is often pretty short. But as software has matured, certain things aren't going away. We've transitioned from manual deployments to virtualized deployments to containerized deployments. Utilizing docker to containerize applications is one of the best things we've done as its provided a consistent predefined image to deploy from. But how do we manage these containers? How do we allocate resources to these containers? How do we manage 
+
 ## Getting started
 
 ### Requirements
@@ -55,7 +59,7 @@ minikube dashboard
 1. Set the environment variables with `eval $(minikube docker-env)
 2. Build the image with the Docker daemon of Minikube (eg `docker build -t my-image .`)
 3. Set the image in the pod spec like the build tag (eg `my-image`)
-4. Set the `imagePullPolicy` to `Never`, otherwise Kubernetes will try to downloa the image
+4. Set the `imagePullPolicy` to `Never`, otherwise Kubernetes will try to download the image
 - [Source](https://stackoverflow.com/questions/42564058/how-to-use-local-docker-images-with-minikube)
 
 ### Pull Image from Private Docker Registry in Kubernetes cluster

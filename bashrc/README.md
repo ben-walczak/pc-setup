@@ -1,6 +1,6 @@
-# bashrc
+# bash
 
-Considering that linux is such a deep rabbit-hole. I'm considering having a separate repository on notes for linux. In such a case, this folder would be deprecated...
+Everything about bash here
 
 **What and Why?**
 .bash_profile and .bashrc helps you customize your terminal to help you to be more productive. You can do things like change colors, create aliases, git prompt, auto-completition, and export certain variables.
@@ -10,78 +10,31 @@ Considering that linux is such a deep rabbit-hole. I'm considering having a sepa
 
 Bash profiles and dot files are essentially bash scripting, setup scripts, prompt scripts, etc.
 
-## Setup
-Change directory to home directory and create files
-```bash
-cd ~/.
-touch .bash_profile
-touch .bashrc
+## .bashrc
+
+Append .bashrc with the following if `tput` works:
+```
+export PS1="$(tput setaf 148)[\t]$(tput setaf 149)\u$(tput setaf 150)@$(tput setaf 151)\h:$(tput 152)\w\n $(tput setaf 153)$ $(tput setaf 15)"
 ```
 
-## Customizations
+Append .bashrc with the following when `tput` does not work:
+```
+export PS1="\e[1;33m\u\e[1;31m@\e[1;32m\h\e[1;36m:\w\n\e[1;35m$ \e[1;0m"
+```
+- Note: I'm still working out some bugs with this when command extends past window length
 
-username@hostname directory/>
-```bash
-PS1="\u@\h \w/> ";
-export PS1;
+Aliases I always forget:
+```
+alias move='tar -xvf'
+alias kubectl='minikube kubectl --'
 ```
 
-username@hostname directory/> with custom colors
-```bash
-PS1="$(tput setaf 166)\u$(tput setaf 116)@$(tput setaf 222)\h$(tput setaf 123) \w$(tput setaf sgr0)/> ";
-export PS1;
-```
+## .bash_profile
 
-seperate by components
-```bash
-# orange user
-PS1="\[$(tput setaf 166)\]\u";
-# yellow host
-PS1+="\[$(tput setaf 228)\]@\h";
-# blue directory
-PS1+="\[$(tput setaf 71)\]@\w";
-# reset color
-PS1+="$(tput sgr0)";
-export PS1;
-```
+## Setting up OpenSSH with OpenVPN
+More research need to be done here as this requires more work than I would like to commit at the moment. Here are some of the resources that I'm looking at:
+- [Ubuntu docs on OpenVPN](https://ubuntu.com/server/docs/service-openvpn)
+- [Ubuntu docs on OpenSSH](https://ubuntu.com/server/docs/service-openssh)
+- [Tech blog on installing both](https://eugenegrechko.com/blog/Installing-OpenVPN-on-Ubuntu-18.04-Server-with-OpenSSH-1.1.0)
 
-save vars and utilize later
-```bash
-orange=$(tput setaf 166);
-bold=$(tput bold);
-reset=$(tput sgr0);
-
-PS1="\[${bold}\]\u>";
-PS1="\[${reset}\]";
-export PS1;
-```
-
-## Colors
-
-Utilizes 256 color chart
-```bash
-echo "$(tput setaf 166) tThis is orange"
-```
-
-Reset color
-```bash
-$(tput sgr0)
-```
-
-## Dotfiles
-Check out [github.io](https://dotfiles.github.io/inspiration/) for some popular dotfiles or bash profiles to use for your terminal.
-
-Very good dotfiles to mimic:
-- https://github.com/cowboy/dotfiles#readme
-- https://github.com/mathiasbynens/dotfiles
-
-## Special Characters
-
-```bash
-\h  the hostname up to the first .
-\s  the name of the shell
-\t  the current time in 24-hour format
-\u  the username of the current user
-\w  the current working directory
-\W  the basename of the current working directory
-```
+There are a lot of security risks implementing this, so I want to take my time here and implement it correctly on the first attempt...
